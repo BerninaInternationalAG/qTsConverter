@@ -32,6 +32,8 @@ auto XlsxBuilder::build(const Result &res) const -> bool
     ++col;
     xlsx.write(row, col, TitleHeader::Translation);
     ++col;
+    xlsx.write(row, col, "Id");
+    ++col;
     if (!m_ioParameter.noLocation) {
         xlsx.write(row, col, TitleHeader::Location);
         ++col;
@@ -46,6 +48,7 @@ auto XlsxBuilder::build(const Result &res) const -> bool
             xlsx.write(row, col++, tr.name);
             xlsx.write(row, col++, msg.source);
             xlsx.write(row, col++, msg.translation);
+            xlsx.write(row, col++, tr.name + "|" + msg.source);
 
             if (!m_ioParameter.noLocation) {
                 for (const auto &loc : msg.locations) {
